@@ -4,5 +4,7 @@ https://code.visualstudio.com/docs/python/tutorial-django#_create-a-project-envi
 
 https://learndjango.com/tutorials/django-login-and-logout-tutorial
 
+https://djangoforbeginners.com/pages-app/
+
 TODO : 
-Dedicated pages app ?
+Tests ?

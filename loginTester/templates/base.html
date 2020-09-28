@@ -2,8 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <title>{% block title %}{% endblock %}</title>
 </head>
+<header>
+  <h1><a href="{% url 'home' %}">Login Tester</a></h1>
+</header>
 <body>
   <main>
     {% block content %}
@@ -11,3 +14,10 @@
   </main>
 </body>
 </html>
+
+{% comment %} <header>
+  <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a>
+</header>
+
+{% block content %}
+{% endblock %} {% endcomment %}
