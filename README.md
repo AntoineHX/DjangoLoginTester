@@ -4,6 +4,8 @@
 pip install django-crispy-forms
 
 # Utilisation
+python manage.py runserver
+
 Connexion utilisateur :
 - Username : admin
 - Password : admin
