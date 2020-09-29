@@ -11,11 +11,12 @@ pip install django-crispy-forms
 python manage.py runserver
 
 ## Docker :
+- Téléchargement (provisoire) : https://we.tl/t-duPOPTZiVq
 - sudo docker load < django_container.tar
 - sudo docker run --network host --mount type=bind,source="$(pwd)"/loginTester,target=/home -w /home antoineh/django python3 manage.py runserver
 
 
-Connexion utilisateur :
+## Connexion utilisateur :
 - Username : admin
 - Password : admin
 
@@ -35,5 +36,5 @@ https://pypi.org/project/django-bootstrap-modal-forms/
 https://djangocentral.com/django-ajax-with-jquery/
 
 # TODO : 
--Tests 
--Otion Docker container avec compose
+- Tests 
+- Option Docker container avec compose
