@@ -1,11 +1,12 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
-    <head>
+    {% comment %} <head>
         <title>Welcome!</title>
         {% block css %}
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         {% endblock css %}
-    </head>
+    </head> {% endcomment %}
     <body>
         {% comment %} <div class="navbar navbar-inverse" role="navigation">
             <div class="container">
@@ -41,9 +42,9 @@
                 {% endfor %}
             {% endif %}
         </div> {% endcomment %}
-        <div class="container">
+        {% comment %} <div class="container"> {% endcomment %}
             {% block content %}
-            <div class="jumbotron">
+            {% comment %} <div class="jumbotron"> {% endcomment %}
                 <h1>Informations</h1>
                 {% comment %} <p>This is a big, gray box! <a href="{% url 'test-form' %}">Leave a comment</a>!</p> {% endcomment %}
                 <!-- Main display -->
@@ -51,21 +52,22 @@
                   <pre>
                     Username : {{ user.username }}
                     Email : {{ user.email }} </pre>
-                  <button id="comment-button" class="btn btn-large">Modifier ses informations</button>
-                  <p> <a href="{% url 'logout' %}">Log Out</a></p>
+                  <button id="modif-button" class="btn btn-large">Modifier ses informations</button>
+                  <button id="logout-button" class="btn btn-large" onClick="location.href='{% url 'logout' %}'">Log out</button>
+                  {% comment %} <p> <a href="{% url 'logout' %}">Log Out</a></p> {% endcomment %}
                 {% else %}
                   <p>You are not logged in</p>
                   <a href="{% url 'login' %}">Log In</a>
                 {% endif %}
-            </div>
+            {% comment %} </div> {% endcomment %}
             {% endblock content %}
-            <hr>
+            {% comment %} <hr> {% endcomment %}
             {% comment %} {% block footer %}
             <footer>
                 <p>Some text</p>
             </footer>
             {% endblock footer %} {% endcomment %}
-        </div>
+        {% comment %} </div> {% endcomment %}
         <div id="form-modal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -89,10 +91,11 @@
             var formAjaxSubmit = function(form, modal) {
                 $(form).submit(function (e) {
                     e.preventDefault();
+                    // create an AJAX call
                     $.ajax({
-                        type: $(this).attr('method'),
+                        type: $(this).attr('method'), // GET or POST
                         url: $(this).attr('action'),
-                        data: $(this).serialize(),
+                        data: $(this).serialize(), // get the form data
                         success: function (xhr, ajaxOptions, thrownError) {
                             if ( $(xhr).find('.has-error').length > 0 ) {
                                 $(modal).find('.modal-body').html(xhr);
@@ -106,7 +109,7 @@
                     });
                 });
             }
-            $('#comment-button').click(function() {
+            $('#modif-button').click(function() {
                 $('#form-modal-body').load("{% url 'test-form' %}", function () {
                     $('#form-modal').modal('toggle');
                     formAjaxSubmit('#form-modal-body form', '#form-modal');

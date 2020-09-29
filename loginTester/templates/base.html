@@ -3,14 +3,22 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
+  {% block css %}
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  {% endblock css %}
 </head>
 <header>
-  <h1><a href="{% url 'home' %}">Login Tester</a></h1>
+  {% comment %} <h1><a href="{% url 'home' %}">Login Tester</a></h1> {% endcomment %}
 </header>
 <body>
   <main>
+    <div class="container">
+    <div class="jumbotron">
     {% block content %}
     {% endblock %}
+    </div>
+    </div>
+    <hr>
   </main>
 </body>
 </html>
