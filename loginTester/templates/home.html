@@ -4,66 +4,21 @@
 
 {% block content %}
 <body>
-    {% comment %} <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            <a class="navbar-brand" href="{% url 'home' %}">Django Modal Forms</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" role="form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
-            </div>
-        </div>
-    </div>  {% endcomment %}
-    {% comment %} <div class="container">
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            </div>
-            {% endfor %}
-        {% endif %}
-    </div> {% endcomment %}
-    {% comment %} <div class="container"> {% endcomment %}
-        {% comment %} {% block content %} {% endcomment %}
-        {% comment %} <div class="jumbotron"> {% endcomment %}
-            <h1>Informations</h1>
-            {% comment %} <p>This is a big, gray box! <a href="{% url 'test-form' %}">Leave a comment</a>!</p> {% endcomment %}
-            <!-- Main display -->
-            {% if user.is_authenticated %}
-              <pre>
-                Username : {{ user.username }}
-                Email : {{ user.email }} </pre>
-              <button id="modif-button" class="btn btn-large">Modifier ses informations</button>
-              <button id="logout-button" class="btn btn-large" onClick="location.href='{% url 'logout' %}'">Log out</button>
-              {% comment %} <p> <a href="{% url 'logout' %}">Log Out</a></p> {% endcomment %}
-            {% else %}
-              <p>You are not logged in</p>
-              <a href="{% url 'login' %}">Log In</a>
-            {% endif %}
-        {% comment %} </div> {% endcomment %}
-        {% comment %} {% endblock content %} {% endcomment %}
-        {% comment %} <hr> {% endcomment %}
-        {% comment %} {% block footer %}
-        <footer>
-            <p>Some text</p>
-        </footer>
-        {% endblock footer %} {% endcomment %}
-    {% comment %} </div> {% endcomment %}
+    <h1>Informations</h1>
+    <!-- Main display -->
+    {% if user.is_authenticated %}
+      <pre>
+        Username : {{ user.username }}
+        Email : {{ user.email }}</pre>
+      <button id="modif-button" class="btn btn-large">Modifier ses informations</button>
+      <button id="logout-button" class="btn btn-large" onClick="location.href='{% url 'logout' %}'">Log out</button>
+      {% comment %} <p> <a href="{% url 'logout' %}">Log Out</a></p> {% endcomment %}
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+
+    <!-- modal -->
     <div id="form-modal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -72,21 +27,18 @@
                     <h4 class="modal-title">Modifier informations</h4>
                 </div>
                 <div id="form-modal-body" class="modal-body">
-                    {% comment %} <p>One fine body&hellip;</p> {% endcomment %}
                 </div>
-                {% comment %} <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Enregistrer</button>
-                </div> {% endcomment %}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal --> 
+
     {% block js %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script>
         var formAjaxSubmit = function(form, modal) {
             $(form).submit(function (e) {
-                e.preventDefault();
+                e.preventDefault(); // prevents the form from performing its default submit action
                 // create an AJAX call
                 $.ajax({
                     type: $(this).attr('method'), // GET or POST
@@ -99,6 +51,7 @@
                         } else {
                             $(modal).modal('toggle');
                         }
+                        // $(document).getElementById("email_field").innerHTML = {{ user.email }};
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                     }
